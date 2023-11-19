@@ -1,0 +1,22 @@
+name: Dev Workflow - Configure, Install, Build and Deploy
+on:
+  push:
+    branches:
+      - 'feature*'
+jobs:
+  cofigure:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/bucker_user
+        aws-region: us-east-2
+
+
+# - uses: actions/checkout@v4
+# - uses: actions/setup-node@v4
+#   with:
+#     node-version: 18
+# - run: npm ci
+# - run: npm test
