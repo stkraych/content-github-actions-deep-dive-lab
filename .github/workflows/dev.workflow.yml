@@ -1,11 +1,12 @@
 name: Dev Workflow - Configure, Install, Build and Deploy
+
 on:
   push:
     branches:
       - 'feature*'
 jobs:
-  built:
-   runs-on: ubuntu-latest
+  build:
+  runs-on: ubuntu-latest
    env: 
      BUCKET_NAME: cfst-3457-85f978fb6fa4358643668ce8a0-nonprodbucket-x8qtsmfrruy4
     - name: Chekcout code
