@@ -4,21 +4,28 @@ on:
     branches:
       - 'feature*'
 jobs:
-  cofigure:
+  built:
    runs-on: ubuntu-latest
+   env: 
+     BUCKET_NAME: cfst-3457-85f978fb6fa4358643668ce8a0-nonprodbucket-x8qtsmfrruy4
    steps:
+    - name: Chekcout code
+    - uses: actions/checkout@v4
     - name: Configure AWS Credentials
-      uses: actions/checkout@v3
-    - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/bucker_user
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-
-
-# - uses: actions/checkout@v4
-# - uses: actions/setup-node@v4
-#   with:
-#     node-version: 18
-# - run: npm ci
-# - run: npm test
+    - name: Set up NodeJS
+    - uses: actions/setup-node@v4
+      with:
+       node-version: 18
+    - name: Build site-gatsby
+      run: |
+        npm cli 
+        npm run build
+    - name: Upload to S3
+      run: |
+        aws s3 sync . s3://${{ env.BUCKET_NAME }}/
+    
