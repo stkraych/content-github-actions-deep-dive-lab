@@ -8,7 +8,6 @@ jobs:
    runs-on: ubuntu-latest
    env: 
      BUCKET_NAME: cfst-3457-85f978fb6fa4358643668ce8a0-nonprodbucket-x8qtsmfrruy4
-   steps:
     - name: Chekcout code
     - uses: actions/checkout@v4
     - name: Configure AWS Credentials
